@@ -1,0 +1,67 @@
+public class student {
+public static void main(String[] args)
+{
+stu Tom = new stu("Tom");
+Tom.setordinary(65.0);
+Tom.setattendance(0.5);
+Tom.qualified();
+System.out.println(Tom.qualified());
+System.out.print(Tom.toString());
+
+}
+}
+class stu{
+private String strname ="";
+private Double ordinary;
+private Double attendance;
+
+public stu(String name){
+	strname=name;
+}
+
+public String getstuName()
+{
+	return strname;
+}
+
+public Double getordinary()
+{
+	return ordinary;
+}
+
+public Double getattendance()
+{
+	return attendance;
+}
+
+public void setstuName(String name)
+{
+	strname=name;
+}
+
+public void setordinary(Double strordinary)
+{
+	ordinary=strordinary;
+}
+
+public void setattendance(Double strattendance)
+{
+	attendance=strattendance;
+}
+
+public boolean qualified()
+{
+	if(ordinary>=60&&attendance>=0.6)
+	{
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+public String toString(){
+	String information="学生姓名="+strname+"，平时成绩="+ordinary+"，出勤率="+attendance;
+	return information;
+}
+}
