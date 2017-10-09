@@ -1,0 +1,107 @@
+#include <stdio.h>  
+#include <malloc.h>  
+//动态队列,链式队列   
+typedef struct Node{  
+    int data;  
+    struct Node * pNext;   
+}NODE,*PNODE;   
+typedef struct Queue{  
+    PNODE front;//队列的出队处   
+    PNODE rear;//队列的入队处   
+}QUEUE,*PQUEUE;   
+  
+void init(PQUEUE);//队列的初始化  
+void in(PQUEUE);//入队  
+void out(PQUEUE,int *);//出队,以及返回出队的元素   
+int getSize(PQUEUE);//得到队列的长度   
+void printQueue(PQUEUE);//打印队列   
+bool is_empty(PQUEUE);   
+  
+int main(void){  
+    QUEUE Q;  
+    int val;   
+    init(&Q);   
+    in(&Q);   
+    in(&Q);  
+    in(&Q);  
+    in(&Q);  
+    in(&Q);  
+    printQueue(&Q);   
+    out(&Q,&val);  
+    printf("出队的元素是:%d\n",val);   
+    printQueue(&Q);  
+    out(&Q,&val);  
+    printf("出队的元素是:%d\n",val);   
+    printQueue(&Q);    
+    return 0;   
+}   
+//队列的初始化  
+void init(PQUEUE pQ){  
+    pQ->front = (PNODE)malloc( sizeof(NODE) );  
+    if(NULL ==  pQ->front){  
+        printf("内存分配失败,初始化失败\n");  
+        exit(-1);   
+    }   
+    pQ->rear = pQ->front;  
+    pQ->front->pNext = NULL;   
+}   
+//入队  
+void in(PQUEUE pQ){  
+    printf("请输入你要入队的元素值:");  
+    int val;   
+    scanf("%d",&val);  
+    PNODE pNew = (PNODE)malloc( sizeof(NODE) );  
+    pNew->data = val;//因为是先进先出,故指针的方向是从font指向到real   
+    pNew->pNext = NULL;   
+    pQ->rear->pNext = pNew;  
+    pQ->rear = pNew;   
+}  
+//出队       
+void out(PQUEUE pQ,int * pVal){  
+    if(is_empty(pQ) ){  
+        printf("当前队列为空,不能出队");   
+        return;   
+    }   
+    PNODE p = pQ->front->pNext; //因为在初始化的时候pQ->front是为NULL的,所以要用pQ->front->pNext  
+    *pVal = p->data;   
+    pQ->front->pNext = p->pNext;  
+        //一般情况下删除队列头元素时仅需修改头结点中的指针,但当队列中最后一个元素被删后,队列尾指针  
+        //也丢失了,因此需对尾指针重新赋值(指向头结点)   
+        if(pQ->rear == p)   
+           pQ->rear = pQ->front;   
+    free(p);   
+}  
+//是否为空   
+bool is_empty(PQUEUE pQ){  
+    if(pQ->rear == pQ->front){  
+        return true;   
+    } return false;   
+}  
+//得到队列长度   
+int getSize(PQUEUE pQ){  
+    if(is_empty(pQ) ){  
+        return 0;   
+    }  
+    PNODE p = pQ->front;  
+    int count=0;   
+    while(p != pQ->rear){  
+        p = p->pNext;   
+        count++;  
+    }   
+    return count;   
+}   
+//打印队列  
+void printQueue(PQUEUE pQ){  
+    if(is_empty(pQ) ){  
+        printf("当前队列为空,不能打印");   
+        return ;   
+    }     
+    PNODE p = pQ->front;  
+    int size = getSize(pQ);   
+    printf("该队列的%d个元素如下:",size);   
+    while(p != pQ->rear){   
+        p = p->pNext;   
+        printf("%d ",p->data);   
+    }   
+    printf("\n");   
+}  
