@@ -1,0 +1,95 @@
+/**动态栈结构定义**/  
+typedef struct Stack    
+{  
+    void **base;        //栈底指针  
+    void **top;         //栈顶指针  
+    int stacksize;      //栈当前可使用的最大容量，以元素个数计  
+}Stack;  
+  
+/** 
+功能：初始化栈存储容量 
+stack:栈存储结构 
+initsize:栈初始化分配空间 
+**/  
+void stack_init(Stack*stack,int initsize)  
+{  
+    stack->base=(void **)malloc(sizeof(void**)*initsize);  
+    if(!stack->base)  
+        error("内存分配是吧");  
+    else  
+    {  
+        stack->top=stack->base;  
+        stack->stacksize=initsize;  
+    }  
+}  
+/** 
+功能：插入元素element为新的栈顶元素 
+stack:栈存储结构 
+element:要插入栈顶的新元素 
+size:栈元素实际尺寸 
+返回值:栈顶元素 
+**/  
+void *stack_push(Stack *stack,void *element,int size)  
+{  
+    int newsize;  
+    if(stack->top==stack->base+stack->stacksize)/**加入栈已满，分配多一倍的空间**/  
+    {  
+        newsize=stack->stacksize*2;  
+        stack->base=(void **)realloc(stack->base,(sizeof(void**)*newsize));  
+        if(!stack->base)  
+            return NULL;  
+        stack->top=stack->base+stack->stacksize;/**stack->base可能已经改变，所以要重新赋值**/  
+        stack->stacksize=newsize;  
+    }  
+    *stack->top=(void **)malloc(size);  
+    memcpy(*stack->top,element,size);           /**从源element所指的内存地址的起始位置开始拷贝size个字节到目标*stack->top所指的内存地址的起始位置中**/  
+    stack->top++;  
+    return*(stack->top-1);  
+}  
+/** 
+弹出栈顶元素 
+**/  
+void stack_pop(Stack*stack)  
+{  
+    if(stack->top>stack->base)  
+        free(*(--stack->top));  
+}  
+/** 
+得到栈顶元素 
+**/  
+void *stack_get_top(Stack *stack)  
+{  
+    void **element;  
+    if(stack->top>stack->base)  
+    {  
+        element=stack->top-1;  
+        return *element;  
+    }  
+    else  
+        return NULL;  
+}  
+/** 
+判断栈是否为空 
+1表示为空，0表示非空 
+**/  
+int stack_is_empty(Stack *stack)  
+{  
+    if(stack->top==stack->base)  
+        return 1;  
+    else  
+        return 0;  
+}  
+/** 
+销毁栈 
+**/  
+void stack_destroy(Stack *stack)  
+{  
+    void **element;  
+    for(element=stack->base;element<stack->top;element++)  
+        free(*element);  
+    if(stack->base)  
+        free(stack->base);  
+    stack->base=NULL;  
+    stack->top=NULL;  
+    stack->stacksize=0;  
+} 
