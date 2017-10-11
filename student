@@ -1,7 +1,7 @@
 public class student {
 public static void main(String[] args)
 {
-stu Tom = new stu("Tom");
+stu Tom = new stu("Toms");
 Tom.setordinary(65.0);
 Tom.setattendance(0.5);
 Tom.qualified();
