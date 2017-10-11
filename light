@@ -1,0 +1,32 @@
+public class lighttest {
+	public static void main(String[] args) {
+		light light1=new light(50);
+		light light2=new light(100);
+		light1.switchOn();
+		light2.switchOn();
+		light2.switchOff();
+		light1.show();
+		light2.show();
+	}
+}
+
+class light{
+	private int watts;
+	private boolean indicator=false;
+	public light(int w)
+	{
+		watts=w;
+	}
+	public void switchOn()
+	{
+		indicator=true;
+	}
+	public void switchOff()
+	{
+		indicator=false;
+	}
+	public void show()
+	{
+		System.out.println("灯泡的光源瓦特数："+watts+"W"+" 开关状态"+indicator);
+	}
+}
