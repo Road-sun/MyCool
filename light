@@ -13,9 +13,9 @@ public class lighttest {
 class light{
 	private int watts;
 	private boolean indicator=false;
-	public light(int w)
+	public light(int wat)
 	{
-		watts=w;
+		watts=wat;
 	}
 	public void switchOn()
 	{
