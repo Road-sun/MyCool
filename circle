@@ -1,0 +1,30 @@
+
+public class circletest {
+	public static void main(String[] args) {
+		circle cricle1=new circle(5.5);
+		circle cricle2=new circle("yellow");
+		System.out.println(cricle1.toString());
+		System.out.println(cricle2.toString());
+		
+	}
+}
+class circle{
+	private double circle_r;
+	private String circle_color;
+	private double circle_c;
+	
+	public circle(double r)
+	{
+		circle_r=r;
+		circle_c=3.14*r*r;
+	}
+	public circle(String color)
+	{
+		circle_color=color;
+	}
+	
+	public String toString(){
+		String information="圆的半径="+circle_r+"，圆的面积="+circle_c+"，圆的颜色="+circle_color;
+		return information;
+	}
+}
