@@ -82,6 +82,12 @@ class dog extends pet
 			System.out.println(super.getName()+" 健康度"+super.getHealth()+" 亲密度"+super.getLove()+"  飞碟游戏好好玩！");
 		}
 	}
+	public void Print(){
+		System.out.println("Name:"+super.getName());
+		System.out.println("健康度:"+super.getHealth());
+		System.out.println("亲密度:"+super.getLove());
+		System.out.println("品种:"+kind);
+	}
 }
 class cat extends pet
 {
@@ -111,5 +117,11 @@ class cat extends pet
 			super.Play();
 			System.out.println(super.getName()+" 健康度"+super.getHealth()+" 亲密度"+super.getLove()+" 线球是我的最爱！");
 		}
+	}
+	public void Print(){
+		System.out.println("Name:"+super.getName());
+		System.out.println("健康度:"+super.getHealth());
+		System.out.println("亲密度:"+super.getLove());
+		System.out.println("毛色:"+color);
 	}
 }
