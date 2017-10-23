@@ -1,0 +1,115 @@
+
+public class pattest {
+	public static void main(String[] args){
+		pet dog1= new dog("yyj",88,25,"哈士奇");
+		pet cat1=new cat("yyj",88,25,"黄色");
+		dog1.Eat();
+		dog1.Play();
+		cat1.Eat();
+		cat1.Play();
+	}
+}
+
+interface petmethod{
+	public void Eat();
+	public void Play();
+}
+class pet implements petmethod{
+	private String PetName="";
+	private int PetHealth;
+	private int PetLove;
+	public pet(String petname,int pethealth,int petlove)
+	{
+		this.PetName=petname;
+		this.PetHealth=pethealth;
+		this.PetLove=petlove;
+	}
+	public void setName(String petname){
+	    this.PetName=petname;
+	}
+	public String getName(){
+		return PetName;
+	}
+	
+	public void setHealth(int pethealth){
+	    this.PetHealth=pethealth;
+	}
+	public int getHealth(){
+		return PetHealth;
+	}
+	
+	public void setLove(int petlove){
+	    this.PetLove=petlove;
+	}
+	public int getLove(){
+		return PetLove;
+	}
+	public void Eat(){
+		PetHealth+=3;
+	}
+	public void Play()
+	{
+		PetHealth-=10;
+		PetLove+=3;
+	}
+}
+class dog extends pet
+{
+	private String kind="";
+	public dog(String petname,int pethealth,int petlove,String kind)
+	{
+		super(petname,pethealth,petlove);
+		this.kind=kind;
+	}
+	public void Eat(){
+		if(super.getHealth()>=100)
+		{
+			System.out.println("DOG:需要多运动！");
+		}
+		else{
+			super.Eat();
+			System.out.println("DOG:"+" 健康度"+super.getHealth()+" 吃饱饭了！");
+		}
+	}
+	
+	public void Play(){
+		if(super.getHealth()<60)
+		{
+			System.out.println("DOG:"+" 健康度"+super.getHealth()+" 生病了！");
+		}
+		else{
+			super.Play();
+			System.out.println(super.getName()+" 健康度"+super.getHealth()+" 亲密度"+super.getLove()+"  飞碟游戏好好玩！");
+		}
+	}
+}
+class cat extends pet
+{
+	private String color="";
+	public cat(String petname,int pethealth,int petlove,String color)
+	{
+		super(petname,pethealth,petlove);
+		this.color=color;
+	}
+	public void Eat(){
+		if(super.getHealth()>=100)
+		{
+			System.out.println("CAT:先别吃了吧！");
+		}
+		else{
+			super.Eat();
+			System.out.println("CAT:"+" 健康度"+super.getHealth()+" 吃饱饭了！");
+		}
+	}
+	
+	public void Play(){
+		if(super.getHealth()<60)
+		{
+			System.out.println("CAT:"+" 健康度"+super.getHealth()+" 生病了！");
+		}
+		else{
+			super.Play();
+			System.out.println(super.getName()+" 健康度"+super.getHealth()+" 亲密度"+super.getLove()+" 线球是我的最爱！");
+		}
+	}
+}
