@@ -5,16 +5,19 @@ public class pattest {
 		pet cat1=new cat("yyj",88,25,"黄色");
 		dog1.Eat();
 		dog1.Play();
+		dog1.Print();
 		cat1.Eat();
 		cat1.Play();
+		cat1.Print();
 	}
 }
 
 interface petmethod{
 	public void Eat();
 	public void Play();
+	public void Print();
 }
-class pet implements petmethod{
+abstract class pet implements petmethod{
 	private String PetName="";
 	private int PetHealth;
 	private int PetLove;
